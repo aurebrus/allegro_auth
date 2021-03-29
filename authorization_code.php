@@ -38,11 +38,15 @@ function getAccessToken($authorization_code) {
 	return json_decode($tokenResult)->access_token;
 }
 
-if ($_GET["code"]) {
-    $access_token = getAccessToken($_GET["code"]);
-	echo "access_token = ", $access_token;
-} else {
+function main(){
+    if ($_GET["code"]) {
+        $access_token = getAccessToken($_GET["code"]);
+		echo "access_token = ", $access_token;
+    } else {
         getAuthorizationCode();
+    }
 }
+
+main();
 
 ?>
