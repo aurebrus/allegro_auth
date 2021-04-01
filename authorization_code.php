@@ -13,20 +13,24 @@ function getAuthorizationCode() {
 	header("Location: " . $authorization_redirect_url);
 }
 
-function getAccessToken($authorization_code) {
-	$authorization = base64_encode(CLIENT_ID.':'.CLIENT_SECRET);
-	$header = array("Authorization: Basic {$authorization}","Content-Type: application/x-www-form-urlencoded");
-	$content = "grant_type=authorization_code&code=$authorization_code&redirect_uri=" . REDIRECT_URI;
-
+function getCurl($headers, $content) {
 	$ch = curl_init();
 	curl_setopt_array($ch, array(
 		CURLOPT_URL => TOKEN_URL,
-		CURLOPT_HTTPHEADER => $header,
+		CURLOPT_HTTPHEADER => $headers,
 		CURLOPT_SSL_VERIFYPEER => false,
 		CURLOPT_RETURNTRANSFER => true,
 		CURLOPT_POST => true,
 		CURLOPT_POSTFIELDS => $content
 	));
+	return $ch;
+}
+
+function getAccessToken($authorization_code) {
+	$authorization = base64_encode(CLIENT_ID.':'.CLIENT_SECRET);
+	$headers = array("Authorization: Basic {$authorization}","Content-Type: application/x-www-form-urlencoded");
+	$content = "grant_type=authorization_code&code=$authorization_code&redirect_uri=" . REDIRECT_URI;
+	$ch = getCurl($headers, $content);
 	$tokenResult = curl_exec($ch);
 	$resultCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 	curl_close($ch);
