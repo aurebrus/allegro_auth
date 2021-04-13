@@ -1,8 +1,8 @@
 <?php
 
-define('CLIENT_ID', '42c06fb738594d198e571b47d39bdd75');
-define('CLIENT_SECRET', 'ifPKW8LZUNfEKEIhvDaOcMzP4daIhQEcmE7qB9iQMRlxdQKLxBhncLIrUp2piGyC');
-define('REDIRECT_URI', 'http://localhost:8888/authorization_code.php');
+define('CLIENT_ID', '');
+define('CLIENT_SECRET', '');
+define('REDIRECT_URI', '');
 define('AUTH_URL', 'https://allegro.pl/auth/oauth/authorize');
 define('TOKEN_URL', 'https://allegro.pl/auth/oauth/token');
 
