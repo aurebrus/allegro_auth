@@ -8,7 +8,6 @@ define('TOKEN_URL', 'https://allegro.pl/auth/oauth/token');
 
 
 function getAuthorizationCode() {
-
 	$authorization_redirect_url = AUTH_URL . "?response_type=code&client_id=" . CLIENT_ID . "&redirect_uri=" . REDIRECT_URI;
 	?>
 	<html>
