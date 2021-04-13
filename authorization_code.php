@@ -1,16 +1,22 @@
 <?php
 
-define('CLIENT_ID', '');
-define('CLIENT_SECRET', '');
-define('REDIRECT_URI', '');
-define('API_HOST', 'https://api.allegro.pl/');
+define('CLIENT_ID', '42c06fb738594d198e571b47d39bdd75');
+define('CLIENT_SECRET', 'ifPKW8LZUNfEKEIhvDaOcMzP4daIhQEcmE7qB9iQMRlxdQKLxBhncLIrUp2piGyC');
+define('REDIRECT_URI', 'http://localhost:8888/authorization_code.php');
 define('AUTH_URL', 'https://allegro.pl/auth/oauth/authorize');
 define('TOKEN_URL', 'https://allegro.pl/auth/oauth/token');
 
 
 function getAuthorizationCode() {
+
 	$authorization_redirect_url = AUTH_URL . "?response_type=code&client_id=" . CLIENT_ID . "&redirect_uri=" . REDIRECT_URI;
-	header("Location: " . $authorization_redirect_url);
+	?>
+	<html>
+	<body>
+	<a href="<?php echo $authorization_redirect_url; ?>">Login to Allegro</a>
+	</body>
+	</html>
+	<?php
 }
 
 function getCurl($headers, $content) {
@@ -47,6 +53,7 @@ function main(){
         $access_token = getAccessToken($_GET["code"]);
 		echo "access_token = ", $access_token;
     } else {
+		
         getAuthorizationCode();
     }
 }
