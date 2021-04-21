@@ -1,7 +1,6 @@
 <?php
 define('CLIENT_ID', ''); // pamietaj aby zarejestrowac klienta typu DEVICE
 define('CLIENT_SECRET', '');
-define('API_HOST', 'https://api.allegro.pl/');
 define('CODE_URL', 'https://allegro.pl/auth/oauth/device');
 define('TOKEN_URL', 'https://allegro.pl/auth/oauth/token');
 
