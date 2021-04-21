@@ -16,8 +16,7 @@ function getCurl($headers, $content) {
 	return $ch;
 }
 
-function getAccessToken() 
-{
+function getAccessToken() {
 	$authorization = base64_encode(CLIENT_ID.':'.CLIENT_SECRET);
 	$headers = array("Authorization: Basic {$authorization}","Content-Type: application/x-www-form-urlencoded");
 	$content = "grant_type=client_credentials";
@@ -26,13 +25,12 @@ function getAccessToken()
     $resultCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 	curl_close($ch);
     if ($tokenResult === false || $resultCode !== 200) {
-        exit ("Something went wrong");
+        exit ("Something went wrong:  $resultCode $tokenResult");
     }
 	return json_decode($tokenResult)->access_token;
 }
 
-function main()
-{
+function main(){
     echo "access_token = ", getAccessToken();
 }
 
