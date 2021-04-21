@@ -40,7 +40,6 @@ function getAccessToken($device_code) {
 	$ch = getCurl(TOKEN_URL, $headers, $content);
 	$tokenResult = curl_exec($ch);
 	curl_close($ch);
-    echo $tokenResult->access_token;
 	return json_decode($tokenResult);
 }
 
