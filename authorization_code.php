@@ -2,7 +2,7 @@
 
 define('CLIENT_ID', '');
 define('CLIENT_SECRET', '');
-define('REDIRECT_URI', '');
+define('REDIRECT_URI', 'http://localhost:8888/authorization_code.php');
 define('AUTH_URL', 'https://allegro.pl/auth/oauth/authorize');
 define('TOKEN_URL', 'https://allegro.pl/auth/oauth/token');
 
@@ -33,15 +33,16 @@ function getCurl($headers, $content) {
 
 function getAccessToken($authorization_code) {
 	$authorization = base64_encode(CLIENT_ID.':'.CLIENT_SECRET);
+	$authorization_code = urlencode($authorization_code);
 	$headers = array("Authorization: Basic {$authorization}","Content-Type: application/x-www-form-urlencoded");
-	$content = "grant_type=authorization_code&code=$authorization_code&redirect_uri=" . REDIRECT_URI;
+	$content = "grant_type=authorization_code&code=${authorization_code}&redirect_uri=" . REDIRECT_URI;
 	$ch = getCurl($headers, $content);
 	$tokenResult = curl_exec($ch);
 	$resultCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 	curl_close($ch);
 
     if ($tokenResult === false || $resultCode !== 200) {
-        exit ("Something went wrong");
+        exit ("Something went wrong:  $resultCode $tokenResult");
     }
 
 	return json_decode($tokenResult)->access_token;
