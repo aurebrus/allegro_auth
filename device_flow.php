@@ -54,9 +54,9 @@ function main(){
          $resultAccessToken = getAccessToken($device_code);
           if (isset($resultAccessToken->error)) {
                if ($resultAccessToken->error == 'access_denied') {
-                   break; // brak dostepu, koniec odpytywania
+                   break; 
               } elseif ($resultAccessToken->error == 'slow_down') {
-                   $interval++; // dodaj jedna sekunde extra, bo za czesto pytamy
+                   $interval++; 
                 }
             } else {
                 $accessToken = $resultAccessToken->access_token;
